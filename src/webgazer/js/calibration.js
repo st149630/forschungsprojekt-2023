@@ -1,5 +1,5 @@
-var PointClicked = 0;
-var ExperimentPoints={};
+var PointCalibrate  = 0;
+var CalibrationPoints ={};
 
 /**
  * Clear the canvas and the calibration button.
@@ -46,27 +46,27 @@ $(document).ready(function(){
 
       var id = $(this).attr('id');
 
-      if (!ExperimentPoints[id]){ // initialises if not done
-        ExperimentPoints[id]=0;
+      if (!CalibrationPoints[id]){ // initialises if not done
+        CalibrationPoints[id]=0;
       }
-      ExperimentPoints[id]++; // increments values
+      CalibrationPoints[id]++; // increments values
 
-      if (ExperimentPoints[id]==5){ //only turn to yellow after 5 clicks
+      if (CalibrationPoints[id]==5){ //only turn to yellow after 5 clicks
         $(this).css('background-color','yellow');
         $(this).prop('disabled', true); //disables the button
-        PointClicked++;
-      }else if (ExperimentPoints[id]<5){
+        PointCalibrate ++;
+      }else if (CalibrationPoints[id]<5){
         //Gradually increase the opacity of calibration points when click to give some indication to user.
-        var opacity = 0.2*ExperimentPoints[id]+0.2;
+        var opacity = 0.2*CalibrationPoints[id]+0.2;
         $(this).css('opacity',opacity);
       }
 
       //Show the middle calibration point after all other points have been clicked.
-      if (PointClicked == 8){
+      if (PointCalibrate  == 8){
         $("#Pt5").show();
       }
 
-      if (PointClicked >= 9){ // last point is calibrated
+      if (PointCalibrate  >= 9){ // last point is calibrated
             //using jquery to grab every element in Calibration class and hide them except the middle point.
             $(".Calibration").hide();
             $("#Pt5").show();
@@ -144,7 +144,7 @@ function ClearCalibration(){
   $(".Calibration").css('opacity',0.2);
   $(".Calibration").prop('disabled',false);
 
-  ExperimentPoints = {};
+  CalibrationPoints = {};
   PointClicked = 0;
 }
 
