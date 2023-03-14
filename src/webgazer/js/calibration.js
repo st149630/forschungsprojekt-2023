@@ -1,5 +1,5 @@
-var PointCalibrate = 0;
-var CalibrationPoints={};
+var PointClicked = 0;
+var ExperimentPoints={};
 
 /**
  * Clear the canvas and the calibration button.
@@ -46,27 +46,27 @@ $(document).ready(function(){
 
       var id = $(this).attr('id');
 
-      if (!CalibrationPoints[id]){ // initialises if not done
-        CalibrationPoints[id]=0;
+      if (!ExperimentPoints[id]){ // initialises if not done
+        ExperimentPoints[id]=0;
       }
-      CalibrationPoints[id]++; // increments values
+      ExperimentPoints[id]++; // increments values
 
-      if (CalibrationPoints[id]==5){ //only turn to yellow after 5 clicks
+      if (ExperimentPoints[id]==5){ //only turn to yellow after 5 clicks
         $(this).css('background-color','yellow');
         $(this).prop('disabled', true); //disables the button
-        PointCalibrate++;
-      }else if (CalibrationPoints[id]<5){
+        PointClicked++;
+      }else if (ExperimentPoints[id]<5){
         //Gradually increase the opacity of calibration points when click to give some indication to user.
-        var opacity = 0.2*CalibrationPoints[id]+0.2;
+        var opacity = 0.2*ExperimentPoints[id]+0.2;
         $(this).css('opacity',opacity);
       }
 
       //Show the middle calibration point after all other points have been clicked.
-      if (PointCalibrate == 8){
+      if (PointClicked == 8){
         $("#Pt5").show();
       }
 
-      if (PointCalibrate >= 9){ // last point is calibrated
+      if (PointClicked >= 9){ // last point is calibrated
             //using jquery to grab every element in Calibration class and hide them except the middle point.
             $(".Calibration").hide();
             $("#Pt5").show();
@@ -130,6 +130,10 @@ function ShowCalibrationPoint() {
   $("#Pt5").hide(); // initially hides the middle button
 }
 
+function HideCalibrationPoints() {
+  $(".Calibration").hide();
+}
+
 /**
 * This function clears the calibration buttons memory
 */
@@ -140,8 +144,8 @@ function ClearCalibration(){
   $(".Calibration").css('opacity',0.2);
   $(".Calibration").prop('disabled',false);
 
-  CalibrationPoints = {};
-  PointCalibrate = 0;
+  ExperimentPoints = {};
+  PointClicked = 0;
 }
 
 // sleep function because java doesn't have one, sourced from http://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep

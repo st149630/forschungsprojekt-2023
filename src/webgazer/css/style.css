@@ -82,6 +82,19 @@ li {
     position:fixed;
 }
 
+.Experiment {
+    width: 20px;
+    height: 20px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    background-color: rgb(73, 199, 69);
+    opacity: 0.2;
+    border-color: black;
+    border-style: solid;
+    position: fixed;
+}
+
 /* Calibration point position */
 #Pt1{
     top: 70px;

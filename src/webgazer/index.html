@@ -17,12 +17,14 @@ Instructions on use can be found in the README repository.
         <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
         <!-- <script src="./tensorflow.js"></script> -->
         <script src="./webgazer.js"></script>
+        
     </head>
     <body LANG="en-US" LINK="#0000ff" DIR="LTR">
       <canvas id="plotting_canvas" width="500" height="500" style="cursor:crosshair;"></canvas>
 
         <script src="./node_modules/jquery/dist/jquery.min.js"></script>
         <script src="./node_modules/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="./experiment/experiment.js"></script>
 
         <script src="./js/main.js"></script>
         <script src="./js/calibration.js"></script>
@@ -42,6 +44,7 @@ Instructions on use can be found in the README repository.
                 <!-- Accuracy -->
                 <li id="Accuracy"><a>Not yet Calibrated</a></li>
                 <li><a onclick="Restart()" href="#">Recalibrate</a></li>
+                <li><a onclick="startExperiment()" href="#">Start Experiment</a></li>
                 <li><a onclick="webgazer.applyKalmanFilter(!webgazer.params.applyKalmanFilter)" href="#">Toggle Kalman Filter</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
@@ -62,6 +65,20 @@ Instructions on use can be found in the README repository.
             <input type="button" class="Calibration" id="Pt8"></input>
             <input type="button" class="Calibration" id="Pt9"></input>
         </div>
+
+         <!-- Experiment Points -->
+    <div class="experimentDiv" id="experiment">
+      <input type="button" class="Experiment" id="Pt1"></input>
+      <input type="button" class="Experiment" id="Pt2"></input>
+      <input type="button" class="Experiment" id="Pt3"></input>
+      <input type="button" class="Experiment" id="Pt4"></input>
+      <input type="button" class="Experiment" id="Pt5"></input>
+      <input type="button" class="Experiment" id="Pt6"></input>
+      <input type="button" class="Experiment" id="Pt7"></input>
+      <input type="button" class="Experiment" id="Pt8"></input>
+      <input type="button" class="Experiment" id="Pt9"></input>
+  </div>
+        
 
         <!-- Modal -->
         <div id="helpModal" class="modal fade" role="dialog">
