@@ -1,16 +1,23 @@
+currentEyeData = [];
+tracking = false;
 window.onload = async function() {
 
     //start the webgazer tracker
     await webgazer.setRegression('ridge') /* currently must set regression and tracker */
         //.setTracker('clmtrackr')
         .setGazeListener(function(data, clock) {
+            if (tracking) {
+                console.log(data)
+                this.currentEyeData.push(data)
+            }
           //console.log(data); /* data is an object containing an x and y key which are the x and y prediction coordinates (no bounds limiting) */
           //   console.log(clock); /* elapsed time in milliseconds since webgazer.begin() was called */
         })
-        .saveDataAcrossSessions(false)
+        .saveDataAcrossSessions(true)
         .begin();
+
         webgazer.showVideoPreview(true) /* shows all video previews */
-            .showPredictionPoints(false) /* shows a square every 100 milliseconds where current prediction is */
+            .showPredictionPoints(true) /* shows a square every 100 milliseconds where current prediction is */
             .applyKalmanFilter(false); /* Kalman Filter defaults to on. Can be toggled by user. */
 
     //Set up the webgazer video feedback.
@@ -48,5 +55,15 @@ function startExperiment() {
     HideCalibrationPoints();
     StartExperiment();
     ExperimentPopUpInstruction();
+}
 
+function experimentClick() {
+    currentEyeData = [];
+    tracking = true;
+}
+
+function experimentClickDone(position) {
+    tracking = false;
+    var data = {position: position, eyetracker: "Webgazer", data: currentEyeData};
+    return data;
 }

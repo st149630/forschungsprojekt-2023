@@ -95,6 +95,52 @@ li {
     position: fixed;
 }
 
+#EPt1 {
+    top: 70px;
+    left: 340px;
+}
+
+#EPt2 {
+    top: 70px;
+    left: 50vw;
+    margin-left: 340;
+}
+
+#EPt3 {
+    top: 70px;
+    right: 2vw;
+}
+
+#EPt4 {
+    top: 50vh;
+    left: 2vw;
+}
+
+#EPt5 {
+    top: 50vh;
+    left: 50vw;
+}
+
+#EPt6 {
+    top: 50vh;
+    right: 2vw;
+}
+
+#EPt7 {
+    bottom: 2vw;
+    left: 2vw;
+}
+
+#EPt8 {
+    bottom: 2vw;
+    left: 50vw;
+}
+
+#EPt9 {
+    bottom: 2vw;
+    right: 2vw;
+}
+
 /* Calibration point position */
 #Pt1{
     top: 70px;

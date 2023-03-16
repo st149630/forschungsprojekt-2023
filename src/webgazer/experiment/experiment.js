@@ -11,6 +11,7 @@ function ExperimentClearCanvas(){
 }
 
 function StartExperiment(){
+  ClearExperiment();
   document.getElementById("experiment").hidden = false;
 }
 /**
@@ -38,25 +39,31 @@ function ExperimentPopUpInstruction(){
 */
 $(document).ready(function(){
     ExperimentClearCanvas();
-     $(".Experiment").click(function(){ // click event on the calibration buttons
-
+     $(".Experiment").click(async function(){ // click event on the experiment buttons
+     
+      experimentClick();
       var id = $(this).attr('id');
+      var element = document.getElementById(id);
+      
 
       if (!ExperimentPoints[id]){ // initialises if not done
         ExperimentPoints[id]=0;
       }
+      var opacity = 0.5;
+      $(this).css('opacity',opacity);
+      await sleep(1000)
       ExperimentPoints[id]++; // increments values
 
-      if (ExperimentPoints[id]==5){ //only turn to yellow after 5 clicks
-        $(this).css('background-color','yellow');
+      if (ExperimentPoints[id]==1){ 
+        $(this).css('background-color','red');
         $(this).prop('disabled', true); //disables the button
         PointClicked++;
-      }else if (ExperimentPoints[id]<5){
-        //Gradually increase the opacity of calibration points when click to give some indication to user.
-        var opacity = 0.2*ExperimentPoints[id]+0.2;
-        $(this).css('opacity',opacity);
+        var data = experimentClickDone({x: element.getBoundingClientRect().x, y: element.getBoundingClientRect().y});
+        console.log(data);
+        var jsonObject = JSON.parse(data);
+        var jsonContent = JSON.stringify(jsonObject);
+        writeToFile("C:\\theFile.txt", jsonContent);
       }
-
       //Show the middle calibration point after all other points have been clicked.
       if (PointClicked == 8){
         $("#EPt5").show();
@@ -90,7 +97,7 @@ function ShowExperimentPoint() {
 function ClearExperiment(){
   // Clear data from WebGazer
 
-  $(".Experiment").css('background-color','red');
+  $(".Experiment").css('background-color','green');
   $(".Experiment").css('opacity',0.2);
   $(".Experiment").prop('disabled',false);
 
@@ -99,6 +106,17 @@ function ClearExperiment(){
 }
 
 // sleep function because java doesn't have one, sourced from http://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
-function sleep (time) {
+async function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+function writeToFile(path, data){
+
+  var writeSystemObject = new ActiveXObject("Scripting.FileSystemObject");
+
+  var writeStream = writeSystemObject.CreateTextFile(path,true);
+
+  writeStream.Write(data);
+
+  writeStream.close();
 }
