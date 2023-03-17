@@ -1,5 +1,6 @@
 var PointClicked = 0;
 var ExperimentPoints={};
+var data = []
 
 /**
  * Clear the canvas and the calibration button.
@@ -58,21 +59,21 @@ $(document).ready(function(){
         $(this).css('background-color','red');
         $(this).prop('disabled', true); //disables the button
         PointClicked++;
-        var data = experimentClickDone({x: element.getBoundingClientRect().x, y: element.getBoundingClientRect().y});
-        console.log(data);
-        var jsonObject = JSON.parse(data);
-        var jsonContent = JSON.stringify(jsonObject);
-        writeToFile("C:\\theFile.txt", jsonContent);
+        var _data = experimentClickDone({x: element.getBoundingClientRect().x, y: element.getBoundingClientRect().y});
+        data.push(_data);
       }
       //Show the middle calibration point after all other points have been clicked.
       if (PointClicked == 8){
         $("#EPt5").show();
       }
 
-      if (PointClicked >= 9){ // last point is calibrated
+      if (PointClicked >= 9){ // last point is clicked
             //using jquery to grab every element in Calibration class and hide them except the middle point.
+            data = JSON.stringify(data)
+            var jsonObject = JSON.parse(data);
+            var jsonContent = JSON.stringify(jsonObject);
+            writeToFile(jsonContent, subject);
             $(".Experiment").hide();
-            $("#EPt5").show();
 
             // clears the canvas
             var canvas = document.getElementById("plotting_canvas");
@@ -88,7 +89,6 @@ $(document).ready(function(){
  */
 function ShowExperimentPoint() {
   $(".Experiment").show();
-  $("#EPt5").hide(); // initially hides the middle button
 }
 
 /**
@@ -103,6 +103,7 @@ function ClearExperiment(){
 
   ExperimentPoints = {};
   PointClicked = 0;
+  data = [];
 }
 
 // sleep function because java doesn't have one, sourced from http://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
@@ -110,13 +111,22 @@ async function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-function writeToFile(path, data){
+function writeToFile(data, subject){
 
-  var writeSystemObject = new ActiveXObject("Scripting.FileSystemObject");
+  // Store data in local storage
+  localStorage.setItem('webgazer', data);
 
-  var writeStream = writeSystemObject.CreateTextFile(path,true);
+  // Retrieve data from local storage
+  const myData = JSON.parse(localStorage.getItem('webgazer'));
 
-  writeStream.Write(data);
-
-  writeStream.close();
+  // Save data to a file
+  const dataBlob = new Blob([JSON.stringify(myData, null, 2)], {type: 'application/json'});
+  const dataUrl = URL.createObjectURL(dataBlob);
+  const link = document.createElement('a');
+  link.href = dataUrl;
+  link.download = `webgazer_${subject}.json`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(dataUrl);
 }

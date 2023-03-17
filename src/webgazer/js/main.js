@@ -1,5 +1,6 @@
 currentEyeData = [];
 tracking = false;
+subject = ' ';
 window.onload = async function() {
 
     //start the webgazer tracker
@@ -8,7 +9,7 @@ window.onload = async function() {
         .setGazeListener(function(data, clock) {
             if (tracking) {
                 console.log(data)
-                this.currentEyeData.push(data)
+                this.currentEyeData.push({x: data.x, y: data.y})
             }
           //console.log(data); /* data is an object containing an x and y key which are the x and y prediction coordinates (no bounds limiting) */
           //   console.log(clock); /* elapsed time in milliseconds since webgazer.begin() was called */
@@ -51,6 +52,7 @@ function Restart(){
 }
 
 function startExperiment() {
+    subject = prompt("Please enter your name", " ");
     ClearCanvas();
     HideCalibrationPoints();
     StartExperiment();
@@ -64,6 +66,6 @@ function experimentClick() {
 
 function experimentClickDone(position) {
     tracking = false;
-    var data = {position: position, eyetracker: "Webgazer", data: currentEyeData};
+    var data = {position: position, eyetracker: "Webgazer", data: currentEyeData, name: subject};
     return data;
 }
