@@ -67,23 +67,15 @@
    }
 </style>
 
-   <script src="https://api.gazerecorder.com/GazeCloudAPI.js" ></script>
 
    <script>
       currentEyeData = [];
       tracking = false;
       subject = ' ';
 
-      function PlotGaze(GazeData) {
-         console.log(GazeData)
-         if (tracking) {
-            currentEyeData.push({x: GazeData.GazeX,y: GazeData.GazeY})
-         }
-      }
 
       function startExperiment() {
          subject = prompt("Please enter your name", " ");
-         GazeCloudAPI.StartEyeTracking();
          ExperimentClearCanvas();
          StartExperiment();
          ExperimentPopUpInstruction();
@@ -96,15 +88,10 @@
 
       function experimentClickDone(position) {
          tracking = false;
-         var data = { position: position, eyetracker: "Gazerecorder", data: currentEyeData, name: subject };
+         var data = { position: position, eyetracker: "(TBD)", data: currentEyeData, name: subject };
          return data;
       }
 
-
-      window.addEventListener("load", function() {
-         GazeCloudAPI.UseClickRecalibration = true;
-         GazeCloudAPI.OnResult = PlotGaze; 
- });
 
    </script>
 </head>
