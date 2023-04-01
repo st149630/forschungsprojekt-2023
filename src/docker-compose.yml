@@ -27,3 +27,16 @@ services:
       - 3001:3001
     restart: unless-stopped
 
+  # experiment
+  experiment:
+    container_name: experiment
+    hostname: localhost
+    build:
+      context: ./experimentStandalone/
+      dockerfile: Dockerfile
+    image: experiment:latest
+    command: ['npm', 'run', 'docker-run']
+    ports:
+      - 3002:3002
+    restart: unless-stopped
+

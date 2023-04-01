@@ -1,8 +1,10 @@
 {
-    "name": "webgazer-www",
+    "name": "experiment",
     "version": "3.0.0",
     "scripts": {
-      "serve": "copyfiles --V ../experiment/* experiment && browser-sync start --server"
+      "init": "copyfiles --V ../experiment/* experiment",
+      "docker-run" : "browser-sync start --server --port 3002",
+      "serve": "npm run init && npm run docker-run"
     },
     "dependencies": {
       "bootstrap": "^4.5.0",
