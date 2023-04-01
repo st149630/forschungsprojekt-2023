@@ -6,9 +6,9 @@
     "url": "https://github.com/brownhci/WebGazer.git"
   },
   "scripts": {
-    "serve": "copyfiles --V ../experiment/* experiment && browser-sync start --server",
-    "build": "browser-sync app -w",
-    "init": "browser-sync init"
+    "init": "copyfiles --V ../experiment/* experiment",
+    "docker-run" : "browser-sync start --server --port 3000",
+    "serve": "npm run init && npm run docker-run"
   },
   "dependencies": {
     "bootstrap": "^4.5.0",

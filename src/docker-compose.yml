@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  # webgazer
+  webgazer:
+    container_name: webgazer
+    hostname: localhost
+    build:
+      context: ./webgazer/
+      dockerfile: Dockerfile
+    image: webgazer:latest
+    command: ['npm', 'run', 'docker-run']
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+
+  # gazeCloud
+  gazecloud:
+    container_name: gazecloud
+    hostname: localhost
+    build:
+      context: ./gazeCloud/
+      dockerfile: Dockerfile
+    image: gazecloud:latest
+    command: ['npm', 'run', 'docker-run']
+    ports:
+      - 3001:3001
+    restart: unless-stopped
+
