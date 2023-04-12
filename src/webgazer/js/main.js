@@ -66,6 +66,6 @@ function experimentClick() {
 
 function experimentClickDone(position) {
     tracking = false;
-    var data = {position: position, eyetracker: "Webgazer", data: currentEyeData, name: subject, start: Date.now(), end: null};
+    var data = {position: position, eyetracker: "Webgazer", data: currentEyeData, name: subject, start: new Date(Date.now()), end: null};
     return data;
 }

@@ -60,7 +60,7 @@ $(document).ready(function(){
         $(this).prop('disabled', true); //disables the button
         PointClicked++;
         var _data = experimentClickDone({x: element.getBoundingClientRect().x, y: element.getBoundingClientRect().y});
-        _data.end = Date.now();
+        _data.end = new Date(Date.now());
         data.push(_data);
       }
       //Show the middle calibration point after all other points have been clicked.
