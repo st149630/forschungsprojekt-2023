@@ -18,7 +18,7 @@ window.onload = async function() {
         .begin();
 
         webgazer.showVideoPreview(false) /* shows all video previews */
-            .showPredictionPoints(true) /* shows a square every 100 milliseconds where current prediction is */
+            .showPredictionPoints(false) /* shows a square every 100 milliseconds where current prediction is */
             .applyKalmanFilter(false); /* Kalman Filter defaults to on. Can be toggled by user. */
 
     //Set up the webgazer video feedback.
