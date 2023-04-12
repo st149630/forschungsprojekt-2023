@@ -19,7 +19,7 @@ button {
     left: 0px !important;
     width: 320px !important;
     height: 240px !important;
-    z-index: 1;
+    z-index: 0;
 }
 
 /* Navbar styling */
@@ -97,7 +97,8 @@ li {
 
 #EPt1 {
     top: 70px;
-    left: 340px;
+    left: 2vw;
+    z-index: 1;
 }
 
 #EPt2 {

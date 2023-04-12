@@ -21,8 +21,9 @@
 
    /* Calibration point position */
    #EPt1 {
-       top: 70px;
-       left: 340px;
+        top: 70px;
+        left: 2vw;
+        z-index: 1;
    }
 
    #EPt2 {
@@ -88,7 +89,7 @@
 
       function experimentClickDone(position) {
          tracking = false;
-         var data = { position: position, eyetracker: "(TBD)", data: currentEyeData, name: subject };
+         var data = { position: position, eyetracker: "(TBD)", data: currentEyeData, name: subject, start: Date.now(), end: null};
          return data;
       }
 

@@ -72,7 +72,7 @@ $(document).ready(function(){
             data = JSON.stringify(data)
             var jsonObject = JSON.parse(data);
             var jsonContent = JSON.stringify(jsonObject);
-            writeToFile(jsonContent, subject);
+            writeToFile(jsonContent, subject, _data.eyetracker);
             $(".Experiment").hide();
 
             // clears the canvas
@@ -111,20 +111,20 @@ async function sleep (time) {
   return new Promise((resolve) => setTimeout(resolve, time));
 }
 
-function writeToFile(data, subject){
+function writeToFile(data, subject, name){
 
   // Store data in local storage
-  localStorage.setItem('webgazer', data);
+  localStorage.setItem(name, data);
 
   // Retrieve data from local storage
-  const myData = JSON.parse(localStorage.getItem('webgazer'));
+  const myData = JSON.parse(localStorage.getItem(name));
 
   // Save data to a file
   const dataBlob = new Blob([JSON.stringify(myData, null, 2)], {type: 'application/json'});
   const dataUrl = URL.createObjectURL(dataBlob);
   const link = document.createElement('a');
   link.href = dataUrl;
-  link.download = `webgazer_${subject}.json`;
+  link.download = `${name}_${subject}.json`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

@@ -17,7 +17,7 @@ window.onload = async function() {
         .saveDataAcrossSessions(true)
         .begin();
 
-        webgazer.showVideoPreview(true) /* shows all video previews */
+        webgazer.showVideoPreview(false) /* shows all video previews */
             .showPredictionPoints(true) /* shows a square every 100 milliseconds where current prediction is */
             .applyKalmanFilter(false); /* Kalman Filter defaults to on. Can be toggled by user. */
 
@@ -66,6 +66,6 @@ function experimentClick() {
 
 function experimentClickDone(position) {
     tracking = false;
-    var data = {position: position, eyetracker: "Webgazer", data: currentEyeData, name: subject};
+    var data = {position: position, eyetracker: "Webgazer", data: currentEyeData, name: subject, start: Date.now(), end: null};
     return data;
 }
