@@ -9,7 +9,9 @@ window.onload = async function() {
         .setGazeListener(function(data, clock) {
             if (tracking) {
                 console.log(data)
-                this.currentEyeData.push({x: data.x, y: data.y})
+                var { patch, ...left} = data.eyeFeatures.left
+                var { patch, ...right} = data.eyeFeatures.right
+                this.currentEyeData.push({x: data.x, y: data.y, left: left, right: right})
             }
           //console.log(data); /* data is an object containing an x and y key which are the x and y prediction coordinates (no bounds limiting) */
           //   console.log(clock); /* elapsed time in milliseconds since webgazer.begin() was called */
