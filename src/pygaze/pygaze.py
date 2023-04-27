@@ -52,7 +52,7 @@ while points < 10:
         break
     my_mouse.get_clicked()
     tracker.start_recording()
-    t_end = time.time() + 1
+    t_end = time.time() + 5
     gazeData = []
     while time.time() < t_end:
         gaze = tracker.sample()
