@@ -9,18 +9,22 @@ for f in files:
         json_data.append(data)
 result = {}
 for data in json_data:
-    print(data)
     if (data[0]['eyetracker'] not in result.keys()):
         result[data[0]['eyetracker']] = []
     for pos in data:
-        for _pos in result[data[0]['eyetracker']]:
+        hit = False
+        for i,_pos in enumerate(result[data[0]['eyetracker']]):
             if (pos['position'] == _pos['position']):
-                print(result[data[0]['eyetracker']])
-                result[data[0]['eyetracker']]['data'].append(pos['data'])
-                break
-        result[data[0]['eyetracker']].append({'position': pos['position'], 'data': pos['data']})
+                print(pos['position'])
+                print(_pos['position'])
+                print(i)
+                result[data[0]['eyetracker']][i]['data'].append(pos['data'])
+                hit = True
+        if not hit:
+            result[data[0]['eyetracker']].append({'position': pos['position'], 'data': pos['data']})
             
-            
+    for pos in result[data[0]['eyetracker']]:
+        print(pos['position'])
 json_object = json.dumps(result, indent=4)
 
 # Writing to sample.json
