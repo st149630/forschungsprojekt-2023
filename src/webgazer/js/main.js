@@ -19,7 +19,7 @@ window.onload = async function() {
         .saveDataAcrossSessions(true)
         .begin();
 
-        webgazer.showVideoPreview(false) /* shows all video previews */
+        webgazer.showVideoPreview(true) /* shows all video previews */
             .showPredictionPoints(false) /* shows a square every 100 milliseconds where current prediction is */
             .applyKalmanFilter(false); /* Kalman Filter defaults to on. Can be toggled by user. */
 
@@ -54,6 +54,7 @@ function Restart(){
 }
 
 function startExperiment() {
+    webgazer.showVideoPreview(false)
     subject = prompt("Please enter your name", " ");
     ClearCanvas();
     HideCalibrationPoints();
