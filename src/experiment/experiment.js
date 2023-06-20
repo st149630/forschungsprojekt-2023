@@ -22,7 +22,7 @@ function ExperimentPopUpInstruction(){
     ExperimentClearCanvas();
   swal({
     title:"Experiment",
-    text: "Bitte auf einen Punkt schauen und einmal drauf klicken bis der Punkt verschwindet. ",
+    text: "Bitte auf einen Punkt klicken und auf diesen schauen bis er Rot wird. ",
     buttons:{
       cancel: false,
       confirm: true

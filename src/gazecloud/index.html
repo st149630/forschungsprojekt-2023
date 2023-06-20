@@ -29,7 +29,6 @@
    #EPt2 {
        top: 70px;
        left: 50vw;
-       margin-left: 340;
    }
 
    #EPt3 {
@@ -97,7 +96,7 @@
 
       function experimentClickDone(position) {
          tracking = false;
-         var data = { position: position, eyetracker: "Gazerecorder", data: currentEyeData, name: subject, start: new Date(Date.now()), end: null};
+         var data = { position: position, eyetracker: "GazeCloud", data: currentEyeData, name: subject, start: new Date(Date.now()), end: null};
          return data;
       }
 
